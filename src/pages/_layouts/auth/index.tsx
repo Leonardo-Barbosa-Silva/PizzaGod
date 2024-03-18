@@ -16,11 +16,11 @@ export function AuthLayout() {
         </footer>
       </div>
 
-      <div className="flex flex-col items-center justify-center px-10">
+      <div className="relative flex flex-col items-center justify-center px-10">
         <Outlet />
       </div>
 
-      <footer className="p-10 text-center text-xs font-semibold text-muted-foreground lg:hidden">
+      <footer className="p-10 text-center text-xs font-medium text-muted-foreground lg:hidden">
         Criado por Leonardo Barbosa &copy; Pizza.God -{' '}
         {new Date().getFullYear()}
       </footer>
