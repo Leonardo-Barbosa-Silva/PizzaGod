@@ -1,19 +1,19 @@
 import { BarChart } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
 
-import { PopularProductsChart } from '@/components/Charts/PopularProducts'
-import { RevenueChart } from '@/components/Charts/Revenue'
-import { DayOrdersAccountCard } from '@/components/Dashboard/Cards/DayOrdersAccount'
-import { MonthCanceledOrdersAccount } from '@/components/Dashboard/Cards/MonthCanceledOrdersAccount'
-import { MonthOrdersAccountCard } from '@/components/Dashboard/Cards/MonthOrdersAccount'
-import { MonthRevenueCard } from '@/components/Dashboard/Cards/MonthRevenue'
+import { PopularProductsChart } from '../../../components/Charts/PopularProducts'
+import { RevenueChart } from '../../../components/Charts/Revenue'
+import { DayOrdersAccountCard } from '../../../components/Dashboard/Cards/DayOrdersAccount'
+import { MonthCanceledOrdersAccount } from '../../../components/Dashboard/Cards/MonthCanceledOrdersAccount'
+import { MonthOrdersAccountCard } from '../../../components/Dashboard/Cards/MonthOrdersAccount'
+import { MonthRevenueCard } from '../../../components/Dashboard/Cards/MonthRevenue'
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
+} from '../../../components/ui/card'
 
 export function Dashboard() {
   return (
