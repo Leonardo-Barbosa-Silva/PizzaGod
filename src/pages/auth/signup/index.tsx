@@ -113,18 +113,19 @@ export function SignUp() {
           <Link to="/login">Faça login aqui</Link>
         </Button>
 
-        <div className="mx-auto flex items-center gap-4">
-          <Button
-            className={`rounded-full font-bold ${stepForm === 1 ? '' : 'bg-muted text-muted-foreground'}`}
+        <div className="mx-auto flex items-center gap-2 text-xs">
+          <span
+            className={`flex h-9 w-9 items-center justify-center rounded-full font-bold ${stepForm === 1 ? 'bg-primary' : 'bg-muted text-muted-foreground'}`}
           >
             1
-          </Button>
-          <Button
-            className={`rounded-full font-bold ${stepForm === 2 ? '' : 'bg-muted text-muted-foreground'}`}
+          </span>
+          <span
+            className={`flex h-9 w-9 items-center justify-center rounded-full font-bold ${stepForm === 2 ? 'bg-primary' : 'bg-muted text-muted-foreground'}`}
           >
             2
-          </Button>
+          </span>
         </div>
+
         <form
           className="space-y-4"
           onSubmit={handleSubmit(handleSignUpFormSubmit)}
@@ -132,7 +133,9 @@ export function SignUp() {
           {stepForm === 1 && (
             <>
               <div className="space-y-1">
-                <Label htmlFor="establishment">Nome do estabelecimento</Label>
+                <Label htmlFor="establishment" className="text-xs">
+                  Nome do estabelecimento
+                </Label>
                 <Input
                   {...register('establishment')}
                   id="establishment"
@@ -148,7 +151,9 @@ export function SignUp() {
               </div>
 
               <div className="space-y-1">
-                <Label htmlFor="ownerName">Seu nome/proprietário</Label>
+                <Label htmlFor="ownerName" className="text-xs">
+                  Seu nome/proprietário
+                </Label>
                 <Input
                   {...register('ownerName')}
                   id="ownerName"
@@ -168,6 +173,7 @@ export function SignUp() {
                   type="button"
                   disabled={isSubmitting}
                   onClick={() => handleSignUpFormStepChange(1)}
+                  size="sm"
                 >
                   Próximo
                 </Button>
@@ -178,7 +184,9 @@ export function SignUp() {
           {stepForm === 2 && (
             <>
               <div className="space-y-1">
-                <Label htmlFor="email">Seu e-mail</Label>
+                <Label htmlFor="email" className="text-xs">
+                  Seu e-mail
+                </Label>
                 <Input
                   {...register('email')}
                   id="email"
@@ -193,7 +201,9 @@ export function SignUp() {
               </div>
 
               <div className="space-y-1">
-                <Label htmlFor="phoneNumber">Telefone</Label>
+                <Label htmlFor="phoneNumber" className="text-xs">
+                  Telefone
+                </Label>
                 <Input
                   {...register('phoneNumber')}
                   id="phoneNumber"
@@ -216,11 +226,12 @@ export function SignUp() {
                   type="button"
                   disabled={isSubmitting}
                   onClick={() => handleSignUpFormStepChange(-1)}
+                  size="sm"
                 >
                   Anterior
                 </Button>
 
-                <Button type="submit" disabled={isSubmitting}>
+                <Button type="submit" disabled={isSubmitting} size="sm">
                   Finalizar
                 </Button>
               </div>
@@ -245,7 +256,7 @@ export function SignUp() {
           )}
         </form>
 
-        <Button asChild variant="ghost" className="mx-auto w-fit lg:hidden">
+        <Button asChild variant="ghost" className="lg:hidden">
           <Link to="/login">Faça login aqui</Link>
         </Button>
       </div>

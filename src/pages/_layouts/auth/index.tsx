@@ -20,7 +20,7 @@ export function AuthLayout() {
         <Outlet />
       </div>
 
-      <footer className="p-10 text-center text-xs font-medium text-muted-foreground lg:hidden">
+      <footer className="px-10 py-5 text-center text-xs font-medium text-muted-foreground lg:hidden">
         Criado por Leonardo Barbosa &copy; Pizza.God -{' '}
         {new Date().getFullYear()}
       </footer>

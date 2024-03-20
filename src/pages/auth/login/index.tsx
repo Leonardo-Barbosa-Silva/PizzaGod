@@ -59,8 +59,10 @@ export function Login() {
           className="space-y-4"
           onSubmit={handleSubmit(handleLoginFormSubmit)}
         >
-          <div className="space-y-2">
-            <Label htmlFor="email">Seu e-mail</Label>
+          <div className="space-y-1">
+            <Label htmlFor="email" className="text-xs">
+              Seu e-mail
+            </Label>
             <Input
               {...register('email')}
               id="email"
@@ -73,12 +75,18 @@ export function Login() {
               </span>
             )}
           </div>
-          <Button type="submit" className="w-full" disabled={isSubmitting}>
+
+          <Button
+            type="submit"
+            className="w-full"
+            disabled={isSubmitting}
+            size="sm"
+          >
             Acessar Painel
           </Button>
         </form>
 
-        <Button asChild variant="ghost" className="mx-auto w-fit lg:hidden">
+        <Button asChild variant="ghost" className="lg:hidden">
           <Link to="/signup">Novo estabelecimento</Link>
         </Button>
       </div>

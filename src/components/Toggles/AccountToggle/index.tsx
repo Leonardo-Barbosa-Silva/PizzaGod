@@ -1,7 +1,7 @@
 import { Building, ChevronDown, LogOut } from 'lucide-react'
 
-import { MenuLinkItem } from '../MenuItem'
-import { Button } from '../ui/button'
+import { MenuLinkItem } from '../../MenuItem'
+import { Button } from '../../ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,7 +9,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '../ui/dropdown-menu'
+} from '../../ui/dropdown-menu'
 
 export function AccountToggle() {
   return (
@@ -20,7 +20,7 @@ export function AccountToggle() {
           <ChevronDown className="ml-2 h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent className="mr-2">
         <DropdownMenuLabel className="flex flex-col">
           <span>Leonardo Barbosa</span>
           <span className="text-xs text-muted-foreground">

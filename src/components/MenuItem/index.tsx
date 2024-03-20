@@ -8,14 +8,14 @@ export function MenuLinkItem({
   to,
   icon: Icon,
   label,
-  hover,
-  className,
+  className = '',
+  linkClassName = '',
 }: MenuItemProps) {
   const { pathname } = useLocation()
 
   return (
     <DropdownMenuItem className={`p-0 ${className}`}>
-      <NavLink to={to} hover={hover}>
+      <NavLink to={to} className={linkClassName}>
         <Icon className="mr-2 h-4 w-4" strokeWidth={pathname === to ? 3 : 2} />
         {label}
       </NavLink>

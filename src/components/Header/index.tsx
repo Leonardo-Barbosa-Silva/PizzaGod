@@ -11,10 +11,10 @@ import { useLocation } from 'react-router-dom'
 
 import { useTheme } from '@/contexts/theme/themeProvider'
 
-import { AccountToggle } from '../AccountToggle'
 import { MenuLinkItem } from '../MenuItem'
 import { NavLink } from '../NavLink'
-import { ThemeToggle } from '../ThemeToggle'
+import { AccountToggle } from '../Toggles/AccountToggle'
+import { ThemeToggle } from '../Toggles/ThemeToggle'
 import { Button } from '../ui/button'
 import {
   DropdownMenu,
@@ -106,7 +106,7 @@ export function Header() {
       <nav className="hidden lg:block">
         <ul className="flex items-center gap-2">
           <li>
-            <NavLink to="/" hover>
+            <NavLink to="/" className="hover:text-muted-foreground">
               <Home
                 className="mr-2 h-4 w-4"
                 strokeWidth={pathname === '/' ? 3 : 2}
@@ -116,7 +116,7 @@ export function Header() {
           </li>
 
           <li>
-            <NavLink to="/orders" hover>
+            <NavLink to="/orders" className="hover:text-muted-foreground">
               <UtensilsCrossed
                 className="mr-2 h-4 w-4"
                 strokeWidth={pathname === '/orders' ? 3 : 2}
