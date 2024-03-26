@@ -1,10 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation } from '@tanstack/react-query'
 import { useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 
+import { signupRestaurant } from '@/api/signup'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -19,7 +21,7 @@ import {
 const stepSignUpFormToFieldsMap: {
   [Num in SignUpFormStepValues]: Array<SignUpFormFieldsName>
 } = {
-  1: ['establishment', 'ownerName'],
+  1: ['establishment', 'managerName'],
   2: ['email', 'phoneNumber'],
 }
 
@@ -33,6 +35,10 @@ export function SignUp() {
   } = useForm<SignUpFormInputsType>({
     mode: 'onSubmit',
     resolver: zodResolver(signUpFormSchema),
+  })
+
+  const { mutateAsync: signup } = useMutation({
+    mutationFn: signupRestaurant,
   })
 
   const navigate = useNavigate()
@@ -56,16 +62,16 @@ export function SignUp() {
     )
   }
 
-  async function handleSignUpFormSubmit(data: SignUpFormInputsType) {
+  async function handleSignUpRestaurantFormSubmit(data: SignUpFormInputsType) {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      const { establishment, managerName, email, phoneNumber } = data
 
-      console.log(data)
+      await signup({ establishment, managerName, email, phoneNumber })
 
       toast.success('Cadastro realizado com sucesso!', {
         action: {
           label: 'Login',
-          onClick: () => navigate('/login'),
+          onClick: () => navigate(`/login?email=${email}`),
         },
       })
     } catch (error) {
@@ -128,7 +134,7 @@ export function SignUp() {
 
         <form
           className="space-y-4"
-          onSubmit={handleSubmit(handleSignUpFormSubmit)}
+          onSubmit={handleSubmit(handleSignUpRestaurantFormSubmit)}
         >
           {stepForm === 1 && (
             <>
@@ -151,19 +157,19 @@ export function SignUp() {
               </div>
 
               <div className="space-y-1">
-                <Label htmlFor="ownerName" className="text-xs">
+                <Label htmlFor="managerName" className="text-xs">
                   Seu nome/proprietário
                 </Label>
                 <Input
-                  {...register('ownerName')}
-                  id="ownerName"
-                  type="ownerName"
+                  {...register('managerName')}
+                  id="managerName"
+                  type="managerName"
                   placeholder="Digite o seu nome/proprietário"
                   required
                 />
-                {errors?.ownerName?.message && (
+                {errors?.managerName?.message && (
                   <span className="text-xs text-destructive">
-                    {errors.ownerName.message}
+                    {errors.managerName.message}
                   </span>
                 )}
               </div>
