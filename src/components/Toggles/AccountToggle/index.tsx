@@ -1,5 +1,5 @@
 import { DialogTrigger } from '@radix-ui/react-dialog'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import {
   AlignJustify,
   Building,
@@ -9,9 +9,11 @@ import {
   Tv2,
   UtensilsCrossed,
 } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 
 import { getManagedEstablishment } from '@/api/getManagedEstablishment'
 import { getProfile } from '@/api/getProfile'
+import { signOut } from '@/api/signout'
 import { ModalAccountForm } from '@/components/ModalAccountForm'
 import { Dialog } from '@/components/ui/dialog'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -34,8 +36,10 @@ import {
 import { ThemeToggle } from '../ThemeToggle'
 
 export function AccountToggle() {
+  const navigate = useNavigate()
+
   const { data: profile } = useQuery({
-    queryKey: ['getProfile'],
+    queryKey: ['profile'],
     queryFn: getProfile,
     staleTime: Infinity,
   })
@@ -44,9 +48,16 @@ export function AccountToggle() {
     data: managedEstablishment,
     isLoading: isLoadingManagedEstablishment,
   } = useQuery({
-    queryKey: ['getManagedEstablishment'],
+    queryKey: ['managed-establishment'],
     queryFn: getManagedEstablishment,
     staleTime: Infinity,
+  })
+
+  const { mutateAsync: signOutFn, isPending: isSigningOut } = useMutation({
+    mutationFn: signOut,
+    onSuccess() {
+      navigate('/login', { replace: true })
+    },
   })
 
   const { setTheme } = useTheme()
@@ -110,12 +121,14 @@ export function AccountToggle() {
               icon={LogOut}
               label="Sair"
               className="text-rose-500 dark:text-rose-400"
+              onClick={() => signOutFn()}
+              disabled={isSigningOut}
             />
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
 
-      <div className="hidden lg:ml-auto lg:flex lg:items-center lg:gap-2">
+      <div className="hidden lg:ml-auto lg:flex lg:gap-2">
         <ThemeToggle />
 
         <DropdownMenu>
@@ -153,6 +166,8 @@ export function AccountToggle() {
               icon={LogOut}
               label="Sair"
               className="text-rose-500 dark:text-rose-400"
+              onClick={() => signOutFn()}
+              disabled={isSigningOut}
             />
           </DropdownMenuContent>
         </DropdownMenu>

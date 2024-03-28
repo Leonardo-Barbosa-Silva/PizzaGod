@@ -1,4 +1,4 @@
-export interface GetManagedEstablishmentRequestBodyProps {
+export interface GetManagedEstablishmentResponseProps {
   name: string
   id: string
   createdAt: Date | null

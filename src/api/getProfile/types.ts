@@ -1,4 +1,4 @@
-export interface GetProfileRequestBodyProps {
+export interface GetProfileResponseProps {
   id: string
   name: string
   email: string

@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import { Link, useSearchParams } from 'react-router-dom'
 import { toast } from 'sonner'
 
-import { login } from '@/api/login'
+import { login } from '@/api/authenticate'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -34,7 +34,7 @@ export function Login() {
   async function handleLoginFormSubmit(data: LoginFormInputsType) {
     try {
       const { email } = data
-      console.log(await authenticate({ email }))
+      await authenticate({ email })
 
       toast.success('Enviamos um link de autenticação para o seu e-mail')
     } catch (error) {
