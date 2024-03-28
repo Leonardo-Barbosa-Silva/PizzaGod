@@ -19,3 +19,7 @@ export interface GetOrdersResponseProps {
     totalCount: number
   }
 }
+
+export interface GetOrdersParams {
+  pageIndex?: number
+}
