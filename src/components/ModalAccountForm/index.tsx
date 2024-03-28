@@ -1,8 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
+import { GetManagedEstablishmentResponseProps } from '@/api/getManagedEstablishment/types'
 import { updateAccount } from '@/api/updateAccount'
 
 import {
@@ -39,8 +40,45 @@ export function ModalAccountForm({
     },
   })
 
+  const queryClient = useQueryClient()
+
+  function updateManagedEstablishmentStoredQueryData(
+    variables: AccountFormInputsType,
+  ) {
+    const { name, description } = variables
+
+    const managedEstablishmentStoredQueryData =
+      queryClient.getQueryData<GetManagedEstablishmentResponseProps>([
+        'managed-establishment',
+      ])
+
+    if (managedEstablishmentStoredQueryData) {
+      queryClient.setQueryData(['managed-establishment'], {
+        ...managedEstablishmentStoredQueryData,
+        name,
+        description,
+      })
+    }
+
+    return managedEstablishmentStoredQueryData
+  }
+
   const { mutateAsync: updateAccountFn } = useMutation({
     mutationFn: updateAccount,
+    onMutate(variables) {
+      const previousManagedEstablishmentStoredQueryData =
+        updateManagedEstablishmentStoredQueryData(variables)
+
+      return { previousManagedEstablishmentStoredQueryData }
+    },
+    onError(_, __, context) {
+      if (context?.previousManagedEstablishmentStoredQueryData) {
+        queryClient.setQueryData(
+          ['managed-establishment'],
+          context.previousManagedEstablishmentStoredQueryData,
+        )
+      }
+    },
   })
 
   async function handleUpdateAccountFormSubmit(data: AccountFormInputsType) {

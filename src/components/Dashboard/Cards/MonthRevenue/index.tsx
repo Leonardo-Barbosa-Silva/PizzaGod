@@ -9,7 +9,10 @@ export function MonthRevenueCard() {
         <CardTitle className="text-sm font-normal md:text-base">
           Receita total (mês)
         </CardTitle>
-        <DollarSign size={20} />
+        <DollarSign
+          size={20}
+          className="text-emerald-500 dark:text-emerald-300"
+        />
       </CardHeader>
 
       <CardContent className="space-y-1">

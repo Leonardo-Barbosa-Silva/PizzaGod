@@ -3,10 +3,13 @@ import { ArrowRight, Search, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import { TableCell, TableRow } from '@/components/ui/table'
+import { currencyFormatter } from '@/utils/currencyFormatter'
 
-import { OrderDetails } from '../Details'
+import { OrderDetails } from './Details'
+import { OrderStatus } from './Status'
+import { OrderTableRowProps } from './types'
 
-export function OrderTableRow() {
+export function OrderTableRow({ order }: OrderTableRowProps) {
   return (
     <TableRow>
       <TableCell>
@@ -22,20 +25,17 @@ export function OrderTableRow() {
         </Dialog>
       </TableCell>
 
-      <TableCell className="font-mono">8asd23fsdvgs34h</TableCell>
+      <TableCell className="font-mono">{order.orderId}</TableCell>
 
       <TableCell className="text-muted-foreground">há 15 minutos</TableCell>
 
       <TableCell>
-        <div className="flex items-center">
-          <span className="mr-2 h-2 w-2 rounded-full bg-slate-400" />
-          <span>Pendente</span>
-        </div>
+        <OrderStatus status={order.status} />
       </TableCell>
 
-      <TableCell>Leonardo Barbosa Silva</TableCell>
+      <TableCell>{order.customerName}</TableCell>
 
-      <TableCell>R$ 169,90</TableCell>
+      <TableCell>{currencyFormatter(order.total, 'pt-BR', 'BRL')}</TableCell>
 
       <TableCell>
         <Button variant="outline" className="h-8 text-xs">

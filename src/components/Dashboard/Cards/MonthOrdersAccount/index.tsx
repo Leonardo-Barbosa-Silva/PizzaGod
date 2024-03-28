@@ -9,7 +9,10 @@ export function MonthOrdersAccountCard() {
         <CardTitle className="text-sm font-normal md:text-base">
           Pedidos (mês)
         </CardTitle>
-        <UtensilsCrossed size={20} />
+        <UtensilsCrossed
+          size={20}
+          className="text-emerald-500 dark:text-emerald-300"
+        />
       </CardHeader>
 
       <CardContent className="space-y-1">

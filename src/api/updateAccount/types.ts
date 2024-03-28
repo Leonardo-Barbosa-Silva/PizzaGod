@@ -1,4 +1,4 @@
 export interface UpdateAccountRequestBodyProps {
   name: string
-  description: string | null
+  description: string
 }

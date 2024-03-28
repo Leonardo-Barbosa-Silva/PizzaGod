@@ -9,14 +9,17 @@ export function DayOrdersAccountCard() {
         <CardTitle className="text-sm font-normal md:text-base">
           Pedidos (dia)
         </CardTitle>
-        <UtensilsCrossed size={20} />
+        <UtensilsCrossed
+          size={20}
+          className="text-rose-500 dark:text-rose-300"
+        />
       </CardHeader>
 
       <CardContent className="space-y-1">
         <span className="text-2xl font-bold tracking-tight">9</span>
         <p className="text-xs text-muted-foreground">
           <span className="text-rose-500 dark:text-rose-300">-3%</span> em
-          relação ao mês passado
+          relação a ontem
         </p>
       </CardContent>
     </Card>

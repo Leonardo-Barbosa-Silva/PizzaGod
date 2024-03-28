@@ -7,4 +7,5 @@ export interface MenuItemProps extends NavLinkProps {
   label: string
   className?: string
   linkClassName?: string
+  disabled?: boolean
 }
