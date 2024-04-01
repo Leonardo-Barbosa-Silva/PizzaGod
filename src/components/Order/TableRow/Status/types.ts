@@ -13,8 +13,8 @@ export const englishOrderStatusMapToPortuguese: Record<OrdersStatus, string> = {
 }
 
 export const orderStatusMapToBgStyle: Record<OrdersStatus, string> = {
-  pending: 'bg-slate-200',
-  processing: 'bg-slate-500',
+  pending: 'bg-slate-100',
+  processing: 'bg-blue-400',
   delivering: 'bg-amber-500',
   delivered: 'bg-emerald-500',
   canceled: 'bg-rose-500',

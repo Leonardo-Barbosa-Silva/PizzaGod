@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query'
-import { useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useSearchParams } from 'react-router-dom'
 import { z } from 'zod'
@@ -25,9 +24,19 @@ export function Orders() {
     .transform((value) => value - 1)
     .parse(searchParams.get('page') ?? '1')
 
+  const orderId = searchParams.get('orderId')
+  const customerName = searchParams.get('customerName')
+  const status = searchParams.get('status')
+
   const { data: respOrders, isLoading: isLoadingPageOrders } = useQuery({
-    queryKey: ['orders', pageIndex],
-    queryFn: () => getOrders({ pageIndex }),
+    queryKey: ['orders', pageIndex, orderId, customerName, status],
+    queryFn: () =>
+      getOrders({
+        pageIndex,
+        orderId,
+        customerName,
+        status: status === 'all' ? null : status,
+      }),
   })
 
   function handleOrdersChangePage(newPageIndex: number) {
@@ -38,20 +47,10 @@ export function Orders() {
     })
   }
 
-  useEffect(() => {
-    setSearchParams((prev) => {
-      prev.set('page', `${searchParams.get('page') ?? '1'}`)
-
-      return prev
-    })
-  }, [])
-
   return (
     <section className="flex flex-col gap-5 p-6">
       <Helmet title="Pedidos" />
-      <h1 className="text-2xl font-semibold tracking-tight lg:text-4xl">
-        Pedidos
-      </h1>
+      <h1 className="text-3xl font-semibold tracking-tight">Pedidos</h1>
 
       <div className="space-y-2">
         <OrderFilters />

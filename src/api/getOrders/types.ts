@@ -5,7 +5,7 @@ export type OrdersStatus =
   | 'delivering'
   | 'delivered'
 
-export interface GetOrdersResponseProps {
+export interface GetOrdersResponse {
   orders: {
     orderId: string
     createdAt: string
@@ -22,4 +22,7 @@ export interface GetOrdersResponseProps {
 
 export interface GetOrdersParams {
   pageIndex?: number
+  orderId?: string | null
+  customerName?: string | null
+  status?: string | null
 }

@@ -158,7 +158,7 @@ export function SignUp() {
 
               <div className="space-y-1">
                 <Label htmlFor="managerName" className="text-xs">
-                  Seu nome/proprietário
+                  Nome do proprietário
                 </Label>
                 <Input
                   {...register('managerName')}

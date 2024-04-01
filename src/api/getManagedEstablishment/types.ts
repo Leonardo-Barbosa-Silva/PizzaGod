@@ -1,4 +1,4 @@
-export interface GetManagedEstablishmentResponseProps {
+export interface GetManagedEstablishmentResponse {
   name: string
   id: string
   createdAt: Date | null

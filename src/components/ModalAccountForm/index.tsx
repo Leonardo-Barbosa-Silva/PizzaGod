@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
-import { GetManagedEstablishmentResponseProps } from '@/api/getManagedEstablishment/types'
+import { GetManagedEstablishmentResponse } from '@/api/getManagedEstablishment/types'
 import { updateAccount } from '@/api/updateAccount'
 
 import {
@@ -42,13 +42,13 @@ export function ModalAccountForm({
 
   const queryClient = useQueryClient()
 
-  function updateManagedEstablishmentStoredQueryData(
+  function updateManagedEstablishmentQueryData(
     variables: AccountFormInputsType,
   ) {
     const { name, description } = variables
 
     const managedEstablishmentStoredQueryData =
-      queryClient.getQueryData<GetManagedEstablishmentResponseProps>([
+      queryClient.getQueryData<GetManagedEstablishmentResponse>([
         'managed-establishment',
       ])
 
@@ -66,16 +66,16 @@ export function ModalAccountForm({
   const { mutateAsync: updateAccountFn } = useMutation({
     mutationFn: updateAccount,
     onMutate(variables) {
-      const previousManagedEstablishmentStoredQueryData =
-        updateManagedEstablishmentStoredQueryData(variables)
+      const prevManagedEstablishmentQueryData =
+        updateManagedEstablishmentQueryData(variables)
 
-      return { previousManagedEstablishmentStoredQueryData }
+      return { prevManagedEstablishmentQueryData }
     },
     onError(_, __, context) {
-      if (context?.previousManagedEstablishmentStoredQueryData) {
+      if (context?.prevManagedEstablishmentQueryData) {
         queryClient.setQueryData(
           ['managed-establishment'],
-          context.previousManagedEstablishmentStoredQueryData,
+          context.prevManagedEstablishmentQueryData,
         )
       }
     },
