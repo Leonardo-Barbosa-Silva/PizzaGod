@@ -14,17 +14,21 @@ export function DayOrdersAmountCard() {
 
   return (
     <Card>
-      {isPendingDayOrdersAmount ? (
-        <Skeleton className="h-[150px]" />
-      ) : dayOrdersAmount ? (
-        <>
-          <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-normal md:text-base">
-              Pedidos (dia)
-            </CardTitle>
-            <Utensils size={20} />
-          </CardHeader>
-          <CardContent className="space-y-1">
+      <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
+        <CardTitle className="text-sm font-normal md:text-base">
+          Pedidos (dia)
+        </CardTitle>
+        <Utensils size={20} />
+      </CardHeader>
+
+      <CardContent className="space-y-1">
+        {isPendingDayOrdersAmount ? (
+          <>
+            <Skeleton className="h-8" />
+            <Skeleton className="h-4" />
+          </>
+        ) : dayOrdersAmount ? (
+          <>
             <span className="text-2xl font-bold tracking-tight">
               {dayOrdersAmount.amount}
             </span>
@@ -43,15 +47,13 @@ export function DayOrdersAmountCard() {
                 em relação a ontem
               </p>
             )}
-          </CardContent>
-        </>
-      ) : (
-        <CardHeader className="flex items-center">
-          <CardTitle className="text-sm font-normal md:text-base">
-            Não conhecido
-          </CardTitle>
-        </CardHeader>
-      )}
+          </>
+        ) : (
+          <span className="text-xl font-bold tracking-tight">
+            Não foi possível obter os dados
+          </span>
+        )}
+      </CardContent>
     </Card>
   )
 }

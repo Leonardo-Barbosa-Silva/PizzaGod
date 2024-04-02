@@ -34,7 +34,7 @@ export function PopularProductsChart() {
   return (
     <>
       {isLoadingPopularProducts ? (
-        <Skeleton className="h-[250px] w-full" />
+        <Skeleton className="mt-[14px] h-[250px] w-full" />
       ) : popularProducts ? (
         <ResponsiveContainer width="100%" height={250}>
           <PieChart data={popularProducts} style={{ fontSize: 14 }}>
@@ -58,7 +58,11 @@ export function PopularProductsChart() {
           </PieChart>
         </ResponsiveContainer>
       ) : (
-        <span className="text-lg">Não foi possível obter dados</span>
+        <div className="flex h-[250px] items-center justify-center">
+          <span className="text-xl font-semibold tracking-tight">
+            Não foi possível obter os dados
+          </span>
+        </div>
       )}
     </>
   )

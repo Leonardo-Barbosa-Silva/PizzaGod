@@ -15,18 +15,21 @@ export function MonthRevenueAmountCard() {
 
   return (
     <Card>
-      {isPendingMonthRevenueAmount ? (
-        <Skeleton className="h-[150px]" />
-      ) : monthRevenueAmount ? (
-        <>
-          <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-normal md:text-base">
-              Receita (mês)
-            </CardTitle>
-            <DollarSign size={20} />
-          </CardHeader>
+      <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
+        <CardTitle className="text-sm font-normal md:text-base">
+          Receita (mês)
+        </CardTitle>
+        <DollarSign size={20} />
+      </CardHeader>
 
-          <CardContent className="space-y-1">
+      <CardContent className="space-y-1">
+        {isPendingMonthRevenueAmount ? (
+          <>
+            <Skeleton className="h-8" />
+            <Skeleton className="h-4" />
+          </>
+        ) : monthRevenueAmount ? (
+          <>
             <span className="text-2xl font-bold tracking-tight">
               {currencyFormatter(
                 monthRevenueAmount.receipt / 100,
@@ -34,30 +37,28 @@ export function MonthRevenueAmountCard() {
                 'BRL',
               )}
             </span>
-            {monthRevenueAmount.diffFromLastMonth >= 0 ? (
-              <p className="text-xs text-muted-foreground">
-                <span className="text-emerald-500 dark:text-emerald-300">
-                  +{monthRevenueAmount.diffFromLastMonth}%
-                </span>{' '}
-                em relação ao mês passado
-              </p>
-            ) : (
+            {monthRevenueAmount.diffFromLastMonth < 0 ? (
               <p className="text-xs text-muted-foreground">
                 <span className="text-rose-500 dark:text-rose-300">
                   {monthRevenueAmount.diffFromLastMonth}%
                 </span>{' '}
                 em relação ao mês passado
               </p>
+            ) : (
+              <p className="text-xs text-muted-foreground">
+                <span className="text-emerald-500 dark:text-emerald-300">
+                  +{monthRevenueAmount.diffFromLastMonth}%
+                </span>{' '}
+                em relação ao mês passado
+              </p>
             )}
-          </CardContent>
-        </>
-      ) : (
-        <CardHeader className="flex items-center">
-          <CardTitle className="text-sm font-normal md:text-base">
-            Não conhecido
-          </CardTitle>
-        </CardHeader>
-      )}
+          </>
+        ) : (
+          <span className="text-xl font-bold tracking-tight">
+            Não foi possível obter os dados
+          </span>
+        )}
+      </CardContent>
     </Card>
   )
 }

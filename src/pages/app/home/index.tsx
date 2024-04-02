@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { subDays } from 'date-fns'
-import { PieChart } from 'lucide-react'
+import { BarChart } from 'lucide-react'
 import { useState } from 'react'
 import { DateRange } from 'react-day-picker'
 import { Helmet } from 'react-helmet-async'
@@ -63,6 +63,7 @@ export function Home() {
               <DatePickerWithRange
                 date={revenueChartDateRange}
                 onDateChange={setRevenueChartDateRange}
+                isLoadingDailyRevenueInPeriod={isLoadingDailyRevenueInPeriod}
               />
             </CardTitle>
 
@@ -83,8 +84,12 @@ export function Home() {
           <CardHeader>
             <CardTitle className="flex items-center justify-between text-xl font-semibold tracking-tight">
               Produtos populares
-              <PieChart size={20} />
+              <BarChart size={20} />
             </CardTitle>
+
+            <CardDescription className="text-sm">
+              Produtos mais pedidos
+            </CardDescription>
           </CardHeader>
 
           <CardContent>

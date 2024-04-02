@@ -16,18 +16,21 @@ export function MonthCanceledOrdersAmountCard() {
 
   return (
     <Card>
-      {isPendingMonthCanceledOrdersAmount ? (
-        <Skeleton className="h-[150px]" />
-      ) : monthCanceledOrdersAmount ? (
-        <>
-          <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-normal md:text-base">
-              Cancelados (mês)
-            </CardTitle>
-            <Ban size={20} />
-          </CardHeader>
+      <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
+        <CardTitle className="text-sm font-normal md:text-base">
+          Cancelados (mês)
+        </CardTitle>
+        <Ban size={20} />
+      </CardHeader>
 
-          <CardContent className="space-y-1">
+      <CardContent className="space-y-1">
+        {isPendingMonthCanceledOrdersAmount ? (
+          <>
+            <Skeleton className="h-8" />
+            <Skeleton className="h-4" />
+          </>
+        ) : monthCanceledOrdersAmount ? (
+          <>
             <span className="text-2xl font-bold tracking-tight">
               {monthCanceledOrdersAmount.amount}
             </span>
@@ -46,15 +49,13 @@ export function MonthCanceledOrdersAmountCard() {
                 em relação ao mês passado
               </p>
             )}
-          </CardContent>
-        </>
-      ) : (
-        <CardHeader className="flex items-center">
-          <CardTitle className="text-sm font-normal md:text-base">
-            Não conhecido
-          </CardTitle>
-        </CardHeader>
-      )}
+          </>
+        ) : (
+          <span className="text-xl font-bold tracking-tight">
+            Não foi possível obter os dados
+          </span>
+        )}
+      </CardContent>
     </Card>
   )
 }

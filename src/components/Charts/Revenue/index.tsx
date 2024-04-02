@@ -36,10 +36,14 @@ export function RevenueChart({ data, isLoading }: RevenueChartProps) {
 
             <YAxis
               stroke="#888"
-              width={100}
               axisLine={false}
               tickLine={false}
+              width={100}
+              tickFormatter={(value) =>
+                currencyFormatter(value, 'pt-BR', 'BRL')
+              }
             />
+
             <XAxis
               stroke="#888"
               tickLine={false}
@@ -64,7 +68,11 @@ export function RevenueChart({ data, isLoading }: RevenueChartProps) {
           </LineChart>
         </ResponsiveContainer>
       ) : (
-        <span className="text-lg">Não foi possível obter os dados</span>
+        <div className="flex h-[250px] items-center justify-center">
+          <span className="text-xl font-semibold tracking-tight">
+            Não foi possível obter os dados
+          </span>
+        </div>
       )}
     </>
   )

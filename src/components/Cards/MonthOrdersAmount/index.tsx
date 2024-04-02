@@ -14,45 +14,46 @@ export function MonthOrdersAmountCard() {
 
   return (
     <Card>
-      {isPendingMonthOrdersAmount ? (
-        <Skeleton className="h-[150px]" />
-      ) : monthOrdersAmount ? (
-        <>
-          <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-normal md:text-base">
-              Pedidos (mês)
-            </CardTitle>
-            <UtensilsCrossed size={20} />
-          </CardHeader>
+      <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
+        <CardTitle className="text-sm font-normal md:text-base">
+          Pedidos (mês)
+        </CardTitle>
+        <UtensilsCrossed size={20} />
+      </CardHeader>
 
-          <CardContent className="space-y-1">
+      <CardContent className="space-y-1">
+        {isPendingMonthOrdersAmount ? (
+          <>
+            <Skeleton className="h-8" />
+            <Skeleton className="h-4" />
+          </>
+        ) : monthOrdersAmount ? (
+          <>
             <span className="text-2xl font-bold tracking-tight">
               {monthOrdersAmount.amount}
             </span>
-            {monthOrdersAmount.diffFromLastMonth >= 0 ? (
-              <p className="text-xs text-muted-foreground">
-                <span className="text-emerald-500 dark:text-emerald-300">
-                  +{monthOrdersAmount.diffFromLastMonth}%
-                </span>{' '}
-                em relação ao mês passado
-              </p>
-            ) : (
+            {monthOrdersAmount.diffFromLastMonth < 0 ? (
               <p className="text-xs text-muted-foreground">
                 <span className="text-rose-500 dark:text-rose-300">
                   {monthOrdersAmount.diffFromLastMonth}%
                 </span>{' '}
                 em relação ao mês passado
               </p>
+            ) : (
+              <p className="text-xs text-muted-foreground">
+                <span className="text-emerald-500 dark:text-emerald-300">
+                  +{monthOrdersAmount.diffFromLastMonth}%
+                </span>{' '}
+                em relação ao mês passado
+              </p>
             )}
-          </CardContent>
-        </>
-      ) : (
-        <CardHeader className="flex items-center">
-          <CardTitle className="text-sm font-normal md:text-base">
-            Não conhecido
-          </CardTitle>
-        </CardHeader>
-      )}
+          </>
+        ) : (
+          <span className="text-xl font-bold tracking-tight">
+            Não foi possível obter os dados
+          </span>
+        )}
+      </CardContent>
     </Card>
   )
 }

@@ -15,12 +15,14 @@ import { cn } from '@/lib/utils'
 interface DatePickerWithRangeProps extends React.ComponentProps<'div'> {
   date?: DateRange
   onDateChange: (date?: DateRange) => void
+  isLoadingDailyRevenueInPeriod: boolean
 }
 
 export function DatePickerWithRange({
   className,
   date,
   onDateChange,
+  isLoadingDailyRevenueInPeriod,
 }: DatePickerWithRangeProps) {
   return (
     <div className={cn('grid gap-2', className)}>
@@ -33,6 +35,7 @@ export function DatePickerWithRange({
               'w-[300px] justify-start text-left font-normal',
               !date && 'text-muted-foreground',
             )}
+            disabled={isLoadingDailyRevenueInPeriod}
           >
             <CalendarIcon className="mr-2 h-4 w-4" />
             {date?.from ? (
@@ -56,7 +59,7 @@ export function DatePickerWithRange({
             defaultMonth={date?.from}
             selected={date}
             onSelect={onDateChange}
-            numberOfMonths={2}
+            numberOfMonths={1}
           />
         </PopoverContent>
       </Popover>
