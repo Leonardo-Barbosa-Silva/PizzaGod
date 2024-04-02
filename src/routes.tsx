@@ -6,13 +6,15 @@ import { Home } from '@/pages/app/home'
 import { Orders } from '@/pages/app/orders'
 import { Login } from '@/pages/auth/login'
 import { SignUp } from '@/pages/auth/signup'
-import { NotFound } from '@/pages/NotFound'
+import { PageNotFound } from '@/pages/PageNotFound'
+
+import { PageError } from './pages/PageError'
 
 export const router = Router([
   {
     path: '/',
     element: <AppLayout />,
-    errorElement: <NotFound />,
+    errorElement: <PageError />,
     children: [
       { path: '/', element: <Home /> },
       { path: '/orders', element: <Orders /> },
@@ -25,5 +27,9 @@ export const router = Router([
       { path: '/login', element: <Login /> },
       { path: '/signup', element: <SignUp /> },
     ],
+  },
+  {
+    path: '*',
+    element: <PageNotFound />,
   },
 ])
