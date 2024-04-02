@@ -1,7 +1,7 @@
 import { SERVER_API } from '../axios'
-import { GetManagedEstablishmentResponseProps } from './types'
+import { GetManagedEstablishmentResponse } from './types'
 
-export async function getManagedEstablishment(): Promise<GetManagedEstablishmentResponseProps> {
+export async function getManagedEstablishment(): Promise<GetManagedEstablishmentResponse> {
   const resp = await SERVER_API.get('/managed-restaurant')
 
   return resp.data
