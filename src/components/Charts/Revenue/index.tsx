@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import {
   CartesianGrid,
   Line,
@@ -9,51 +10,62 @@ import {
 } from 'recharts'
 import colors from 'tailwindcss/colors'
 
-const data = [
-  { date: '10/03', revenue: 1200 },
-  { date: '11/03', revenue: 800 },
-  { date: '12/03', revenue: 3600 },
-  { date: '13/03', revenue: 2000 },
-  { date: '14/03', revenue: 420 },
-  { date: '15/03', revenue: 970 },
-  { date: '16/03', revenue: 3234 },
-]
+import { Skeleton } from '@/components/ui/skeleton'
+import { currencyFormatter } from '@/utils/currencyFormatter'
 
-export function RevenueChart() {
+import { RevenueChartProps } from './types'
+
+export function RevenueChart({ data, isLoading }: RevenueChartProps) {
+  const dailyRevenueChartData = useMemo(
+    () =>
+      data?.map((chartItem) => ({
+        ...chartItem,
+        receipt: chartItem.receipt / 100,
+      })),
+    [data],
+  )
+
   return (
-    <ResponsiveContainer width="100%" height={250}>
-      <LineChart data={data} style={{ fontSize: 16 }}>
-        <CartesianGrid vertical={false} className="stroke-muted" />
+    <>
+      {isLoading ? (
+        <Skeleton className="h-[250px] w-full" />
+      ) : dailyRevenueChartData ? (
+        <ResponsiveContainer width="100%" height={250}>
+          <LineChart data={dailyRevenueChartData} style={{ fontSize: 16 }}>
+            <CartesianGrid vertical={false} className="stroke-muted" />
 
-        <YAxis
-          stroke="#888"
-          width={100}
-          axisLine={false}
-          tickLine={false}
-          tickFormatter={(value: number) =>
-            value.toLocaleString('pt-BR', {
-              style: 'currency',
-              currency: 'BRL',
-            })
-          }
-        />
-        <XAxis
-          stroke="#888"
-          tickLine={false}
-          axisLine={false}
-          dataKey="date"
-          padding={{ left: 16, right: 20 }}
-          dy={14}
-        />
-        <Line
-          dataKey="revenue"
-          name="Receita"
-          stroke={colors.violet[500]}
-          type="linear"
-          strokeWidth={2}
-        />
-        <Tooltip cursor={false} />
-      </LineChart>
-    </ResponsiveContainer>
+            <YAxis
+              stroke="#888"
+              width={100}
+              axisLine={false}
+              tickLine={false}
+            />
+            <XAxis
+              stroke="#888"
+              tickLine={false}
+              axisLine={false}
+              dataKey="date"
+              padding={{ left: 16, right: 20 }}
+              dy={14}
+            />
+            <Line
+              dataKey="receipt"
+              name="Receita"
+              stroke={colors.violet[500]}
+              type="linear"
+              strokeWidth={2}
+            />
+            <Tooltip
+              cursor={false}
+              formatter={(value) =>
+                currencyFormatter(Number(value), 'pt-BR', 'BRL')
+              }
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      ) : (
+        <span className="text-lg">Não foi possível obter os dados</span>
+      )}
+    </>
   )
 }

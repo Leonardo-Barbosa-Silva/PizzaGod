@@ -1,11 +1,11 @@
 import { DialogTrigger } from '@radix-ui/react-dialog'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import {
-  AlignJustify,
   Building,
   ChevronDown,
   Home,
   LogOut,
+  Menu,
   Tv2,
   UtensilsCrossed,
 } from 'lucide-react'
@@ -68,7 +68,7 @@ export function AccountToggle() {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="select-none px-3">
-              <AlignJustify size={20} strokeWidth={2} />
+              <Menu size={25} />
             </Button>
           </DropdownMenuTrigger>
 
